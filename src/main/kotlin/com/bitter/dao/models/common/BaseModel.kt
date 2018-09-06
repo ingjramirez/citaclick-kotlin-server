@@ -7,7 +7,7 @@ import java.util.*
 open class BaseModel {
 
     @Id
-    var id: String = ""
+    var id: String? = null
 
     @CreatedBy
     @JsonIgnore
@@ -26,8 +26,7 @@ open class BaseModel {
     var updatedAt: Date = Date()
 
     @Version
-    @JsonIgnore
-    var version: Long = 1
+    private var version: Long? = null
 
     @JsonIgnore
     var delete: Boolean = false
@@ -40,7 +39,7 @@ open class BaseModel {
         createdAt: Date,
         updatedBy: String,
         updatedAt: Date,
-        version: Long,
+        version: Long?,
         delete: Boolean
     ) {
         this.id = id

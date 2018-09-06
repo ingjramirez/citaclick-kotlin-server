@@ -2,7 +2,6 @@ package com.bitter.dao.models
 
 import com.bitter.dao.models.common.BaseModel
 import com.fasterxml.jackson.annotation.JsonProperty
-import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.index.TextIndexed
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field
@@ -12,7 +11,6 @@ import java.util.*
 class User : BaseModel {
 
     @TextIndexed
-    @Indexed(unique = true)
     var email: String = ""
 
     var password: String = ""
@@ -33,9 +31,9 @@ class User : BaseModel {
     @Field("date_of_birth")
     var dateOfBirth: Date = Date()
 
-    var phones: List<String>? = null
+    var phones: List<Phone>? = null
 
-    var addresses: List<String>? = null
+    var addresses: List<Address>? = null
 
     constructor() {}
 
@@ -46,8 +44,8 @@ class User : BaseModel {
         middleName: String,
         lastName: String,
         dateOfBirth: Date,
-        phones: List<String>,
-        addresses: List<String>
+        phones: List<Phone>?,
+        addresses: List<Address>?
     ) {
         this.email = email
         this.password = password
