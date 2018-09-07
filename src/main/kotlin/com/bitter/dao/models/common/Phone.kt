@@ -1,4 +1,4 @@
-package com.bitter.dao.models
+package com.bitter.dao.models.common
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

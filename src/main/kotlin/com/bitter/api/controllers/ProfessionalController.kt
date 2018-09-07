@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/users")
-class UserController {
+class ProfessionalController {
 
     @Autowired
     lateinit var userService: UserService

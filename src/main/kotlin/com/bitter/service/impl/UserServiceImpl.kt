@@ -2,7 +2,7 @@ package com.bitter.service.impl
 
 import com.bitter.api.dto.UserDTO
 import com.bitter.dao.enums.ErrorCodes
-import com.bitter.dao.models.Error
+import com.bitter.dao.models.common.Error
 import com.bitter.dao.models.User
 import com.bitter.dao.repositories.UserRepository
 import com.bitter.service.UserService
@@ -31,7 +31,7 @@ class UserServiceImpl : UserService {
 
     }
 
-    override fun findOneByEmail(email: String): User? {
+    override fun findOneByEmail(email: String?): User? {
         return userRepository.findByEmail(email)
     }
 

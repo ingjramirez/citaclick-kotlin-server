@@ -7,7 +7,7 @@ interface UserService {
 
     fun findOne(id:String): ResponseEntity<*>
 
-    fun findOneByEmail(email:String): User?
+    fun findOneByEmail(email:String?): User?
 
     fun addOne(user:User): ResponseEntity<*>
 

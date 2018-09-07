@@ -1,18 +1,24 @@
 package com.bitter.dao.models
 
-import com.bitter.dao.models.common.BaseModel
+import com.bitter.dao.enums.Role
+import com.bitter.dao.models.common.*
 import com.fasterxml.jackson.annotation.JsonProperty
+import org.jetbrains.annotations.NotNull
 import org.springframework.data.mongodb.core.index.TextIndexed
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field
 import java.util.*
+import kotlin.collections.ArrayList
 
 @Document(collection = "users")
-class User : BaseModel {
+open class User : BaseModel {
+
+    constructor() {}
 
     @TextIndexed
-    var email: String = ""
+    var email: String? = null
 
+    @NotNull
     var password: String = ""
 
     @JsonProperty("first_name")
@@ -29,32 +35,16 @@ class User : BaseModel {
 
     @JsonProperty("date_of_birth")
     @Field("date_of_birth")
-    var dateOfBirth: Date = Date()
+    var dateOfBirth: Date? = null
 
-    var phones: List<Phone>? = null
+    var phones: ArrayList<Phone>? = null
 
-    var addresses: List<Address>? = null
+    var addresses: ArrayList<Address>? = null
 
-    constructor() {}
+    var profile: ProfessionalProfile? = null
 
-    constructor(
-        email: String,
-        password: String,
-        firstName: String,
-        middleName: String,
-        lastName: String,
-        dateOfBirth: Date,
-        phones: List<Phone>?,
-        addresses: List<Address>?
-    ) {
-        this.email = email
-        this.password = password
-        this.firstName = firstName
-        this.middleName = middleName
-        this.lastName = lastName
-        this.dateOfBirth = dateOfBirth
-        this.phones = phones
-        this.addresses = addresses
-    }
+    var caseFile: CaseFile? = null
+
+    var role: Role? = null
 
 }
