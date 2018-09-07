@@ -1,7 +1,10 @@
 package com.bitter.dao.models.common
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 class CaseFile {
 
-    var caseFileEntries: ArrayList<CaseFileEntry>? = null
+    @JsonProperty("case_file_entries")
+    var caseFileEntries: ArrayList<CaseFileEntry>? = ArrayList()
 
 }

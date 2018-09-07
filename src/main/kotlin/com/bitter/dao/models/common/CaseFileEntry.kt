@@ -7,9 +7,9 @@ class CaseFileEntry {
 
     var entryText: String = ""
 
-    var prescriptions: ArrayList<Prescription>? = null
+    var prescriptions: ArrayList<Prescription> = ArrayList()
 
-    var attachments: ArrayList<File>? = null
+    var attachments: ArrayList<File> = ArrayList()
 
     @CreatedDate
     var createdAt: OffsetDateTime = OffsetDateTime.now()

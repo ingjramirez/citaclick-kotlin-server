@@ -10,6 +10,7 @@ class ProfessionalProfile {
 
     var qualifications: List<Qualification> = ArrayList()
 
+    @JsonProperty("working_hours")
     var workingHours: HashMap<DayOfWeek, List<WorkingHours>>? = null
 
 }

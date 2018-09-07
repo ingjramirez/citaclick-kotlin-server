@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 class UserDTO(
 
-    @JsonIgnoreProperties("password")
+    @JsonIgnoreProperties("password, roles")
     var user: User
 
 )
