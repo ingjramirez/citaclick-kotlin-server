@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 class Prescription {
 
-    @JsonProperty("medicament_dosis")
+    @JsonProperty("medicament_name")
     var medicamentName: String = ""
 
     @JsonProperty("medicament_dosis")

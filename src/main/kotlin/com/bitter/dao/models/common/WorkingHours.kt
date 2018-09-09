@@ -1,14 +1,17 @@
 package com.bitter.dao.models.common
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
-import java.time.OffsetDateTime
+import java.time.LocalTime
 
 class WorkingHours {
 
     @JsonProperty("start_time")
-    var startTime: OffsetDateTime? = null
+    @JsonFormat(pattern = "HH:mm")
+    var startTime: LocalTime? = null
 
     @JsonProperty("end_time")
-    var endTime: OffsetDateTime? = null
+    @JsonFormat(pattern = "HH:mm")
+    var endTime: LocalTime? = null
 
 }

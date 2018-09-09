@@ -11,4 +11,5 @@ class BeanUtils {
     fun encoder(): BCryptPasswordEncoder {
         return BCryptPasswordEncoder()
     }
+
 }
