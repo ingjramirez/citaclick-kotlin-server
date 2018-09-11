@@ -6,7 +6,6 @@
     <groupId>com.bitter</groupId>
     <artifactId>citaclick-server</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>war</packaging>
 
     <name>citaclick-server</name>
     <description>Citaclick back-end application</description>
@@ -115,12 +114,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <attachClasses>true</attachClasses>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
