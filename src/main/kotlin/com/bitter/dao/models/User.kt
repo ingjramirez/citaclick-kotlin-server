@@ -51,6 +51,6 @@ open class User : BaseModel {
 
     var patientIds: ArrayList<String>? = null
 
-    var role: Role? = null
+    var role: Role = Role.PATIENT
 
 }

@@ -1,13 +1,17 @@
 package com.bitter.dao.models.common
 
-enum class TimeFrame {
+import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonProperty
+import java.time.LocalTime
 
-    SECONDS,
-    MINUTES,
-    HOURS,
-    DAYS,
-    WEEKS,
-    MONTHS,
-    YEARS
+class TimeFrame {
+
+    @JsonProperty("start_time")
+    @JsonFormat(pattern = "HH:mm")
+    var startTime: LocalTime? = null
+
+    @JsonProperty("end_time")
+    @JsonFormat(pattern = "HH:mm")
+    var endTime: LocalTime? = null
 
 }

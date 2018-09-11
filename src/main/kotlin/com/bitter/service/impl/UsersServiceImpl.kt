@@ -1,7 +1,7 @@
 package com.bitter.service.impl
 
 import com.bitter.api.dto.UserDTO
-import com.bitter.config.utils.isEmailValid
+import com.bitter.config.utils.FunctionsUtils
 import com.bitter.dao.enums.ErrorCodes
 import com.bitter.dao.models.User
 import com.bitter.dao.models.common.Error
@@ -21,6 +21,9 @@ class UsersServiceImpl: UsersService {
     lateinit var userRepository: UserRepository
 
     @Autowired
+    lateinit var functionsUtils: FunctionsUtils
+
+    @Autowired
     private lateinit var passwordEncoder: PasswordEncoder
 
     override fun findOne(id: String): ResponseEntity<*> {
@@ -34,7 +37,7 @@ class UsersServiceImpl: UsersService {
     }
 
     override fun findOneByEmail(email: String?): User? {
-        return userRepository.findByEmail(email)
+        return userRepository.findByEmailAndDeleteIsFalse(email)
     }
 
     override fun addOne(user: User): ResponseEntity<*> {
@@ -57,7 +60,7 @@ class UsersServiceImpl: UsersService {
         val userByEmail = findOneByEmail(user.email)
         if (userByEmail != null)
             return Error(ErrorCodes.EMAIL_ALREADY_EXISTS)
-        if (user.email != null && !isEmailValid(user.email))
+        if (user.email != null && !functionsUtils.isEmailValid(user.email))
             return Error(ErrorCodes.INVALID_EMAIL_ADDRESS)
 
         return null

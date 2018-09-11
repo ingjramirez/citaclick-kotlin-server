@@ -1,5 +1,6 @@
 package com.bitter.dao.models.common
 
+import com.bitter.dao.enums.TimeFrame
 import com.fasterxml.jackson.annotation.JsonProperty
 
 class Prescription {

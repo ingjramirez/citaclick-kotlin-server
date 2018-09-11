@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
-class PatientsServiceImp: PatientsService{
+class PatientServiceImpl: PatientsService {
 
     @Autowired
     lateinit var userService: UsersService
@@ -25,9 +25,9 @@ class PatientsServiceImp: PatientsService{
     override fun getPatients(professionalId:String): List<PatientDTO> {
 
         val professionalOptional = userService.findUserById(professionalId)
-        if (professionalOptional.isPresent){
+        return if (professionalOptional.isPresent){
             val patientIds = professionalOptional.get().patientIds
-            return if (patientIds != null) {
+            if (patientIds != null) {
                 val patients = ArrayList<PatientDTO> ()
                 for (id : String in patientIds){
                     val patient = userRepository.findById(id)
@@ -37,9 +37,8 @@ class PatientsServiceImp: PatientsService{
                 patients
             } else
                 ArrayList()
-        }
-
-        return ArrayList()
+        } else
+            ArrayList()
     }
 
     override fun addPatient(professionalId: String, patient: User): ResponseEntity<*> {
@@ -48,13 +47,21 @@ class PatientsServiceImp: PatientsService{
         return if (!professional.isPresent)
             ResponseEntity(Error(ErrorCodes.RESOURCE_NOT_FOUND), HttpStatus.NOT_FOUND)
         else {
-            patient.caseFile = CaseFile()
-            val createdPatient = userRepository.save(patient)
             val tmpProfessional = professional.get()
             var patientIds = tmpProfessional.patientIds
             if (patientIds == null)
                 patientIds = ArrayList()
-            patientIds.add(createdPatient.id!!)
+
+            val checkIfPresent = userRepository.findByEmailAndDeleteIsFalse(patient.email)
+
+            if (checkIfPresent == null) {
+                patient.caseFile = CaseFile()
+                val createdPatient = userRepository.save(patient)
+                patientIds.add(createdPatient.id!!)
+            } else {
+                patientIds.add(checkIfPresent.id!!)
+            }
+
             tmpProfessional.patientIds = patientIds
             userRepository.save(tmpProfessional)
 
