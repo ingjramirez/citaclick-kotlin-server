@@ -11,6 +11,6 @@ class ProfessionalProfile {
     var qualifications: List<Qualification> = ArrayList()
 
     @JsonProperty("working_hours")
-    var workingHour: HashMap<DayOfWeek, List<TimeFrame>> = HashMap()
+    var workingHours: HashMap<DayOfWeek, List<TimeFrame>> = HashMap()
 
 }
