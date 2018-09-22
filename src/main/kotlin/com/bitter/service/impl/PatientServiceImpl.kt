@@ -52,14 +52,14 @@ class PatientServiceImpl: PatientsService {
             if (patientIds == null)
                 patientIds = ArrayList()
 
-            val checkIfPresent = userRepository.findByEmailAndDeleteIsFalse(patient.email)
+            val checkIfPatientExist = userRepository.findByEmailAndDeleteIsFalse(patient.email)
 
-            if (checkIfPresent == null) {
+            if (checkIfPatientExist == null) {
                 patient.caseFile = CaseFile()
                 val createdPatient = userRepository.save(patient)
                 patientIds.add(createdPatient.id!!)
             } else {
-                patientIds.add(checkIfPresent.id!!)
+                patientIds.add(checkIfPatientExist.id!!)
             }
 
             tmpProfessional.patientIds = patientIds

@@ -14,7 +14,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 
 @Configuration
 @EnableAuthorizationServer
-class AuthorizationServerConfig: AuthorizationServerConfigurerAdapter() {
+class AuthorizationServerConfig : AuthorizationServerConfigurerAdapter() {
 
     val CLIENT_ID = "citaclick_client"
     val CLIENT_SECRET = "\$2a\$04\$V0LRawH5932T3paFXHGSsuRX9/MpH9siSkA5Ql7ey5uMa//s4dI/u"
@@ -46,20 +46,19 @@ class AuthorizationServerConfig: AuthorizationServerConfigurerAdapter() {
     @Throws(Exception::class)
     override fun configure(configurer: ClientDetailsServiceConfigurer) {
         configurer
-            .inMemory()
-            .withClient(CLIENT_ID)
-            .secret(CLIENT_SECRET)
-            .authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT)
-            .scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
-            .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS).
-                refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS);
+                .inMemory()
+                .withClient(CLIENT_ID)
+                .secret(CLIENT_SECRET)
+                .authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT)
+                .scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
+                .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS).refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS);
     }
 
     @Throws(Exception::class)
     override fun configure(endpoints: AuthorizationServerEndpointsConfigurer) {
         endpoints.tokenStore(tokenStore())
-            .authenticationManager(authenticationManager)
-            .accessTokenConverter(accessTokenConverter());
+                .authenticationManager(authenticationManager)
+                .accessTokenConverter(accessTokenConverter());
     }
 
 }

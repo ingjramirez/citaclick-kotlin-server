@@ -3,6 +3,7 @@ package com.bitter.service.impl
 import com.bitter.api.dto.UserDTO
 import com.bitter.config.utils.FunctionsUtils
 import com.bitter.dao.enums.ErrorCodes
+import com.bitter.dao.enums.Role
 import com.bitter.dao.models.User
 import com.bitter.dao.models.common.Error
 import com.bitter.dao.repositories.UserRepository
@@ -86,6 +87,8 @@ class UsersServiceImpl: UsersService, UserDetailsService {
             return Error(ErrorCodes.EMAIL_ALREADY_EXISTS)
         if (user.email != null && !functionsUtils.isEmailValid(user.email))
             return Error(ErrorCodes.INVALID_EMAIL_ADDRESS)
+        if(user.role == Role.ADMIN)
+            return Error(ErrorCodes.AUTHORIZATION_PROBLEM)
 
         return null
     }

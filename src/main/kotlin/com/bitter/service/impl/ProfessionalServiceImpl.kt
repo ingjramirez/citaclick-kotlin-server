@@ -38,7 +38,7 @@ class ProfessionalServiceImpl : ProfessionalService {
     override fun findAllProfessionals(pageable: Pageable): ResponseEntity<*> {
 
         val professionals = userRepository.findUsersByRole(pageable, Role.PROFESSIONAL)
-        val result = professionals.map { professional -> UserDTO(professional) }
+        val result = professionals.map { UserDTO(it) }
 
         return ResponseEntity(result, HttpStatus.OK)
     }

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
+import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import org.springframework.web.filter.CorsFilter
 
@@ -22,7 +23,7 @@ import org.springframework.web.filter.CorsFilter
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-class SecurityConfig: WebSecurityConfigurerAdapter() {
+class SecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Resource(name = "user_service")
     private lateinit var userDetailsService: UserDetailsService
@@ -37,19 +38,20 @@ class SecurityConfig: WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     fun globalUserDetails(auth: AuthenticationManagerBuilder) {
         auth.userDetailsService(userDetailsService)
-            .passwordEncoder(encoder())
+                .passwordEncoder(encoder())
     }
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http
-            .csrf().disable()
-            .anonymous().disable()
-            .authorizeRequests()
-            .antMatchers(HttpMethod.POST, "/**").authenticated()
-            .antMatchers(HttpMethod.PUT, "/**").authenticated()
-            .antMatchers(HttpMethod.DELETE, "/**").authenticated()
-            .antMatchers("/api-docs/**").permitAll()
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("**/api-docs/**").permitAll()
+    }
+
+    @Throws(Exception::class)
+    override fun configure(web: WebSecurity) {
+        web.ignoring().antMatchers(HttpMethod.POST, "/users/")
     }
 
     @Bean
